@@ -1,6 +1,6 @@
 #filename: peaksandvalleys.py
 
-data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
+data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 7, 9]
 
 def findPeaks(data): #able to recognize cliff at the end as peak
     peaks = []
@@ -14,7 +14,7 @@ def findPeaks(data): #able to recognize cliff at the end as peak
                 peaks.append(i)
    
     return peaks
-    
+      
 
 def findValleys(data):
     valleys = []
@@ -53,14 +53,15 @@ def drawMap(data):
 def gapFill(drawMap,findPeaks):
     listMap = drawMap(data)
     oCount = 0
-    for i in listMap:
-        for el in range(len(i)):
-            if i[el-1] in ['X','O'] and i[el] == ' ' and not el == 0:
-                i[el] = 'O'
+    peaks = findPeaks(data)
+    for lis in listMap:
+        for i in range(len(lis)):
+            if lis[i-1] in ['X','O'] and lis[i] == ' ' and not i == 0 and 'X' in lis[i:len(lis)]:
+                lis[i] = 'O'
     for i in range(len(listMap)):
         print(' '.join(listMap[i]),max(data)-i)
-    for i in listMap:
-        for el in i:
+    for lis in listMap:
+        for el in lis:
             if el == 'O':
                 oCount += 1
     print(oCount)
