@@ -33,7 +33,7 @@ def maxt(e,f,g):
     elif f>e and f>g:
         return f
     elif g>e and g>f:
-        return c
+        return g
     else:
         return str('ow')
 #e=int(input('gimme'))

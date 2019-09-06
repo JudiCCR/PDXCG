@@ -8,6 +8,9 @@ class Player:
     def __init__(self, name, tokens):
         self.tokens = tokens
         self.name = name
+    
+    def __str__(self):
+        return f'{self.name}'
 
 class Game:
     def __init__(self):
@@ -17,7 +20,10 @@ class Game:
         return f'{self.board}'
 
     def move(self, x, y, player):
-        self.board[x][y] = player.tokens #if self.board[x][y] = '_' else print('cheater!')
+        if self.board[x][y] == '_':
+            self.board[x][y] = player.tokens  
+        else:
+            print('cheater')
         
     
     def calc_winner(self):
@@ -41,7 +47,10 @@ class Game:
         elif self.board[0][0] == self.board[1][1] == self.board[2][2] and self.board[0][0] != '_':
             return 'win' 
         elif self.board[0][2] == self.board[1][1] == self.board[2][0] and self.board[0][2] != '_':
-            return 'win' 
+            return 'win'
+        
+        else:
+            return 'pass turn'
  
     
     def isfull(self):
@@ -76,13 +85,14 @@ def main():
     while newgame.isgameover() == False:
         for player in players:
                 if newgame.isgameover() == False:
+                    print(player,' turn')
                     newgame.move(int(input('row: ')),int(input('col: ')),player)
                     print(newgame.__repr__())
                     print(newgame.calc_winner())
-    if newgame.calc_winner() == 'win':
-        print(player,' is the winner!')
-    else:
-        print('draw...')
+                    if newgame.calc_winner() == 'win':
+                        print(player,' is the winner!')
+                    elif newgame.isfull() == False:
+                        print('draw...')
         
         
         
