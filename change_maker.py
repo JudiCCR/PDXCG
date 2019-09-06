@@ -5,8 +5,8 @@ import math
 
 pennies=int(input("How many pennies do you have?\n"))
 
-dollars=math.floor(pennies/100)
-dorem=pennies%100
+dollars = math.floor(pennies/100)
+dorem = pennies % 100
 
 quarters=math.floor(dorem/25)
 qrem=dorem%25
