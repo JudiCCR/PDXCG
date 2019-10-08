@@ -9,7 +9,7 @@
         body {
             display: grid;
             grid-template-rows: [header] 100px [body] 8fr [footer] 1fr  ;
-            grid-template-columns: [left-gutter] 1fr [display] 3fr [interface] 5fr [right-gutter] 1fr ;
+            grid-template-columns: [left-gutter] 1fr [display] 5fr [interface] 3fr [right-gutter] 1fr ;
             grid-gap: 20px;
         }
 
@@ -38,6 +38,10 @@
             background-color: green;
         }
 
+        .elements {
+            color: blue;
+        }
+
         
 
     </style>
@@ -48,15 +52,43 @@
         <h1>To Do list</h1>
     </header>
     <section class="display">
-        <h3>list items</h3>
+        <div>
+            <h3>list items</h3>
+            <ul id="list"></ul>
+        </div>
+        <div>
+            <h3>completed items</h3>
+            <ul id="finished"></ul>
+        </div>
     </section>
     <section class="interface">
         <h3>interface</h3>
+        <input type="text" id="inputItem">write item here</input>
+        <button id="submitItem">submit</button>
     </section>
     <footer class="footer">
         <h5>footer</h5>
     </footer>
     <script>
+
+        let input = document.querySelector("#inputItem")
+
+        
+
+        submitItem.addEventListener("click", function(event) {
+            
+            let element = document.createElement("li")
+            element.innerText = input.value
+            element.className = "elements"
+            element.addEventListener("click", function(event) {
+                element.style.color = "white"
+                let copy = document.createElement("li")
+                copy.innerText = element.innerText
+                copy.className = "elements"
+                finished.appendChild(copy)
+            })
+            list.appendChild(element)
+        })
 
     </script>
 </body>
