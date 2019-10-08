@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDo</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-rows: [header] 100px [body] 8fr [footer] 1fr  ;
+            grid-template-columns: [left-gutter] 1fr [display] 3fr [interface] 5fr [right-gutter] 1fr ;
+            grid-gap: 20px;
+        }
+
+        header {
+            grid-row: header;
+            grid-column: display/right-gutter;
+            background-color: yellow;
+        }
+
+        .display {
+            grid-row: body;
+            grid-column: display;
+            background-color: red;
+
+        }
+
+        .interface {
+            grid-row: body;
+            grid-column: interface;
+            background-color: blue;
+        }
+
+        .footer {
+            grid-row: footer;
+            grid-column: 1 / -1;
+            background-color: green;
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>To Do list</h1>
+    </header>
+    <section class="display">
+        <h3>list items</h3>
+    </section>
+    <section class="interface">
+        <h3>interface</h3>
+    </section>
+    <footer class="footer">
+        <h5>footer</h5>
+    </footer>
+    <script>
+
+    </script>
+</body>
+</html>
