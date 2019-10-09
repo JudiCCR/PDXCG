@@ -8,22 +8,32 @@
     <style>
         body {
             display: grid;
-            grid-template-rows: [header] 100px [body] 8fr [footer] 1fr  ;
+            grid-template-rows: [header] 1fr [body] 8fr;
             grid-template-columns: [left-gutter] 1fr [display] 5fr [interface] 3fr [right-gutter] 1fr ;
             grid-gap: 20px;
+            font-family: "Press Start 2P","Yoshi's Story game text BRK", "Trebuchet MS";
+            background: linear-gradient(to bottom right, #bebaff, #febaff) fixed;
+            color:#d2691e;
         }
 
         header {
             grid-row: header;
             grid-column: display/right-gutter;
             background-color: yellow;
+            text-align: center;
+        }
+
+        li {
+            color: #d2691e !important;
         }
 
         .display {
             grid-row: body;
             grid-column: display;
             background-color: red;
-
+            display: grid;
+            grid-template-rows: [unfinished] 1fr [completed] 1fr;
+            grid-template-columns: 1fr;
         }
 
         .interface {
@@ -32,16 +42,49 @@
             background-color: blue;
         }
 
-        .footer {
-            grid-row: footer;
-            grid-column: 1 / -1;
-            background-color: green;
+        #finished li {
+            text-decoration: line-through;
         }
 
-        .elements {
-            color: blue;
+        .btn {
+            margin: 5px;
+            border: none;
         }
 
+        .rmBtn {
+            background-color: purple;
+        }
+
+        .finBtn {
+            background-color: gold;
+        }
+
+        body > * {
+            border-radius: 10px;
+            background-color: #fffacd !important;
+        }
+
+        #unfinished {
+            grid-row: unfinished;
+        }
+
+        #completed {
+            grid-row: completed;
+        }
+
+        .wrapper {
+            padding: 10px;
+            text-align: center;
+        }
+
+        #inputItem {
+            background: transparent;
+            font-family: "Press Start 2P";
+            text-align: center;
+            border: none;
+            color: #d2691e;
+            font-size: 2em;
+        }
         
 
     </style>
@@ -51,45 +94,77 @@
     <header class="header">
         <h1>To Do list</h1>
     </header>
-    <section class="display">
-        <div>
+    <section class="display wrapper">
+        <div id="unfinished">
             <h3>list items</h3>
             <ul id="list"></ul>
         </div>
-        <div>
+        <div id="complete">
             <h3>completed items</h3>
             <ul id="finished"></ul>
         </div>
     </section>
-    <section class="interface">
-        <h3>interface</h3>
-        <input type="text" id="inputItem">write item here</input>
-        <button id="submitItem">submit</button>
+    <section class="interface wrapper">
+        <h3>enter</h3>
+        <input type="text" id="inputItem"></input>
+        <div id="submitItem"></div>
+        <p style="color: purple">press to remove</p>
+        <br>
+        <p style="color: gold">press to complete</p>
     </section>
-    <footer class="footer">
-        <h5>footer</h5>
-    </footer>
+
     <script>
+
+
+        let submitItem = document.querySelector("#submitItem")
 
         let input = document.querySelector("#inputItem")
 
-        
+        input.focus()
 
+        inputItem.addEventListener("keydown", function(event) {
+            console.log(event.keyCode)
+            if (event.keyCode === 13) {
+                submitItem.click()
+            }
+            
+        })
+            
+            
         submitItem.addEventListener("click", function(event) {
             
             let element = document.createElement("li")
             element.innerText = input.value
             element.className = "elements"
-            element.addEventListener("click", function(event) {
-                element.style.color = "white"
-                let copy = document.createElement("li")
-                copy.innerText = element.innerText
-                copy.className = "elements"
-                finished.appendChild(copy)
+
+            let rmBtn = document.createElement("input")
+            rmBtn.type = "button"
+            rmBtn.classList.add("rmBtn", "btn")
+
+            let finBtn = document.createElement("input")
+            finBtn.type = "button"
+            finBtn.classList.add("finBtn", "btn")
+            
+            finBtn.addEventListener("click", function(event) { 
+                element.removeChild(finBtn)
+                finished.appendChild(element)
+
+                rmBtn.addEventListener("click", function(event) {
+                    finished.removeChild(element)
+                })
             })
+
+            rmBtn.addEventListener("click", function(event) {
+                list.removeChild(element)
+            })
+
+            element.appendChild(rmBtn)
+            element.appendChild(finBtn)
+
             list.appendChild(element)
         })
-
+        
+        
     </script>
 </body>
 </html>
